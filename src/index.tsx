@@ -1,19 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Button from "./components/Button";
+import Container from "./components/Container";
+import Headline from "./components/Headline";
+import Label from "./components/Label";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+interface IFragment {
+  counter: number;
+  onIncrementCounter: () => void;
+  theme: any;
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+declare global {
+  interface Window {
+    NodeComponent: any;
+  }
+}
+
+const Root = ({ counter, onIncrementCounter, theme }: IFragment) => {
+  return (
+    <Container theme={theme}>
+      <Label theme={theme}>fragment</Label>
+      <Headline theme={theme}>Hello JS Kongress!</Headline>
+      <h2>
+        Count: <strong>{counter}</strong>
+      </h2>
+      <Button theme={theme} onClick={onIncrementCounter}>
+        Increment
+      </Button>
+    </Container>
+  );
+};
+
+window.NodeComponent = Root;
